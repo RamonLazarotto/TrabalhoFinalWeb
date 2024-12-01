@@ -1,0 +1,13 @@
+<?php
+    require 'banco.php';
+
+    $id_pessoa = $_GET['id_pessoa'];
+
+    $sql = "select * from pessoas  
+             where id_pessoa = :id_pessoa";	
+    $qry = $con->prepare($sql); 
+    $qry->bindParam(':id_pessoa', $id_pessoa, PDO::PARAM_INT);
+    $qry->execute();
+    $registros = $qry->fetchAll(PDO::FETCH_OBJ);
+    echo json_encode($registros);
+?>
